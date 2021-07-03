@@ -24,8 +24,11 @@ public class TodoApplication  implements CommandLineRunner{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:ss");
 
 		Todo t1 = new Todo(null, "Estudar", "Estudar Springboot e Angular 11", sdf.parse("10/07/2021 00:00"), false);
+		Todo t2 = new Todo(null, "Praticar", "Praticar Springboot e Angular 11", sdf.parse("10/07/2021 00:00"), false);
+		Todo t3 = new Todo(null, "Usar", "Usar Springboot e Angular 11", sdf.parse("10/07/2021 00:00"), true);
+		Todo t4 = new Todo(null, "OK", "OK Springboot e Angular 11", sdf.parse("10/07/2021 00:00"), true);
 
-		TodoRepository.saveAll(Arrays.asList(t1));
+		TodoRepository.saveAll(Arrays.asList(t1, t2, t3, t4));
 	}
 
 }
