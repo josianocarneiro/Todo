@@ -50,4 +50,9 @@ public class TodoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
 	}
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Todo> deletar(@PathVariable Integer id){
+		service.deletar(id);
+		return ResponseEntity.noContent().build();
+	}
 }
