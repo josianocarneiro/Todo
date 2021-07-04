@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jcsis.todo.domain.Todo;
 import com.jcsis.todo.repositories.TodoRepository;
+import com.jcsis.todo.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TodoService {
@@ -15,8 +16,7 @@ public class TodoService {
 	private TodoRepository repo;
 	public Todo findById(Integer id) {
 		Optional<Todo> obj = repo.findById(id);
-		return obj.orElse(null);
-//		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
 	}
 	public List<Todo> listarTarefas() {
 		return repo.findAll();
@@ -32,6 +32,16 @@ public class TodoService {
 		repo.save(obj);
 	}
 	public void deletar(Integer id) {
-		repo.deleteById(id);
+		if (findById(id) != null) {		
+			repo.deleteById(id);
+		}
+	}
+	public Todo atualizar(Integer id, Todo obj) {
+		Todo newObj = findById(id);
+		newObj.setDataTarefa(obj.getDataTarefa());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setNome(obj.getNome());
+		newObj.setConcluida(obj.getConcluida());
+		return repo.save(newObj);
 	}
 }
