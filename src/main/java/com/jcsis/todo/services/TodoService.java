@@ -27,4 +27,8 @@ public class TodoService {
 	public List<Todo> listarTarefasConcluidas() {
 		return repo.findByConcluidaFalse();
 	}
+	public void salvar(Todo obj) {
+		obj.setId(null);
+		repo.save(obj);
+	}
 }
